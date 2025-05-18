@@ -1,7 +1,11 @@
-import type { NextConfig } from "next";
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+});
 
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   /* config options here */
+  pageExtensions: ['ts','tsx','md','mdx'],
 };
 
-export default nextConfig;
+module.exports = withMDX(nextConfig);
