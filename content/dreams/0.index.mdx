@@ -1,183 +1,222 @@
+<style jsx>{`
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.75;
+    color: #333;
+  }
+
+  h1, h2, h3 {
+    color: #222;
+    margin-top: 2rem;
+  }
+
+  img.centered {
+    display: block;
+    margin: 2rem auto;
+    border-radius: 12px;
+    max-width: 100%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  ul {
+    padding-left: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  hr {
+    margin: 2rem 0;
+    border: none;
+    border-top: 1px solid #ddd;
+  }
+`}</style>
+
+<div className="container">
+
 # **DSA Rulebook: Arrays**
 
 Arrays are one of the most fundamental data structures in problem-solving. To choose the correct approach, follow this structured decision-making guide.
 
 ---
 
+<img src="/sample.avif" alt="Sample" width="400" className="centered" />
+
 ## **1. Is the array sorted?**
 
 - **Yes** → Consider **Binary Search** (O(log n))
-    - If the problem involves searching, find elements efficiently using **Binary Search**.
-    - If modifications (insertion/deletion) are allowed, consider **Balanced BST** or **Ordered Map**.
-    - If two indices need to be found (sum or difference condition), use **Two Pointers**.
+  - If the problem involves searching, find elements efficiently using **Binary Search**.
+  - If modifications (insertion/deletion) are allowed, consider **Balanced BST** or **Ordered Map**.
+  - If two indices need to be found (sum or difference condition), use **Two Pointers**.
 
 ---
 
 ## **2. Is the problem asking for a maximum/minimum element continuously?**
 
 - **Yes** → Consider:
-    - **Heap (Priority Queue)** → If you need to get the max/min dynamically.
-    - **Monotonic Queue** → If the problem involves sliding window and max/min queries.
+  - **Heap (Priority Queue)** → If you need to get the max/min dynamically.
+  - **Monotonic Queue** → If the problem involves sliding window and max/min queries.
 
 ---
 
 ## **3. Is the problem about finding a subarray or substring with a condition?**
 
 - **Yes** → Consider:
-    - **Sliding Window** → If the problem involves a window that expands/shrinks dynamically (e.g., longest substring without repeating characters).
-    - **Two Pointers** → If the array needs to be partitioned based on a condition (e.g., sum of two numbers).
-    - **Prefix Sum** → If cumulative sums are needed for range queries.
-    - **Kadane’s Algorithm** → If the problem asks for the maximum sum subarray.
+  - **Sliding Window** → If the window expands/shrinks dynamically.
+  - **Two Pointers** → If the array needs partitioning based on a condition.
+  - **Prefix Sum** → If cumulative sums are needed for range queries.
+  - **Kadane’s Algorithm** → For the maximum sum subarray.
 
 ---
 
 ## **4. Are we searching for a specific element or checking for existence?**
 
 - **Yes** → Consider:
-    - **Hash Map / Hash Set** → Best for quick lookup (O(1) average time).
-    - **Binary Search** (if sorted) → Efficient search in O(log n).
+  - **Hash Map / Hash Set** → Quick lookup (O(1) average).
+  - **Binary Search** → If the array is sorted.
 
 ---
 
 ## **5. Are elements added or removed in a sliding window fashion?**
 
 - **Yes** → Consider:
-    - **Deque (Monotonic Queue)** → If you need to maintain max/min values dynamically.
-    - **Sliding Window with Hash Map** → If unique elements need to be tracked dynamically.
+  - **Deque (Monotonic Queue)** → To maintain max/min values dynamically.
+  - **Sliding Window with Hash Map** → To track unique elements dynamically.
 
 ---
 
 ## **6. Does the problem ask for the number of ways to do something?**
 
 - **Yes** → Consider:
-    - **Dynamic Programming (DP)** → If the problem has overlapping subproblems and optimal substructure.
-    - **Backtracking** → If all possible combinations need to be explored.
+  - **Dynamic Programming (DP)** → If subproblems overlap.
+  - **Backtracking** → If all combinations must be explored.
 
 ---
 
 ## **7. Is the problem about merging or partitioning arrays?**
 
 - **Yes** → Consider:
-    - **Two Pointers** → If arrays are sorted.
-    - **Merge Sort (O(n log n))** → If efficient merging is needed.
-    - **Quick Sort** → If partitioning around a pivot is required.
+  - **Two Pointers** → If arrays are sorted.
+  - **Merge Sort** → Efficient merging (O(n log n)).
+  - **Quick Sort** → Partitioning around a pivot.
 
 ---
 
 ## **8. Is the problem asking for distance between elements?**
 
 - **Yes** → Consider:
-    - **Stack / Monotonic Stack** → If nearest greater/smaller elements are involved (e.g., Next Greater Element).
-    - **Two Pointers** → If comparing element distances directly.
+  - **Stack / Monotonic Stack** → For nearest greater/smaller elements.
+  - **Two Pointers** → For comparing distances.
 
 ---
 
 ## **9. Is the problem about prefix matching or searching substrings efficiently?**
 
 - **Yes** → Consider:
-    - **Trie** → If dealing with a dictionary of words (e.g., autocomplete, prefix search).
-    - **KMP Algorithm / Rabin-Karp** → If substring searching in a long string is needed.
+  - **Trie** → For dictionary-based lookups.
+  - **KMP / Rabin-Karp** → For fast substring search.
 
 ---
 
-## **10. Is the problem checking if a sequence is valid (e.g., brackets, stock span problem)?**
+## **10. Is the problem checking if a sequence is valid (e.g., brackets)?**
 
 - **Yes** → Consider:
-    - **Stack** → If LIFO (Last In First Out) behavior is needed.
-
----
-
-## **Conclusion**
-
-Understanding the problem’s requirements and recognizing patterns in questions will help in choosing the optimal approach. Arrays often serve as the foundation for more advanced data structures like stacks, queues, and heaps.
-
----
-
-## **Next Steps**
-
-- **Practice Problems:**
-    - Two Sum (Hash Map, Two Pointers)
-    - Maximum Subarray (Kadane’s Algorithm)
-    - Longest Substring Without Repeating Characters (Sliding Window)
-    - Next Greater Element (Monotonic Stack)
-    - Binary Search Variants (Lower/Upper Bound)
-
-The next topic will be **Strings**, following the same structured approach. Let me know if you’d like any modifications or additional explanations! 
-
-
-
-## **Strings**
-
-### **1. Is the problem about checking if two strings are anagrams or contain the same characters?**
-
-- **Yes** → Consider:
-    
-    - **Sorting & Comparing** → If sorting is feasible (O(n log n)).
-    - **Hash Map / Frequency Count** → If an efficient O(n) approach is needed.
-        
-### **2. Is the problem about searching for a substring in another string?**
-
-- **Yes** → Consider:
-    - **KMP Algorithm / Rabin-Karp** → If efficient pattern matching is needed.
-    - **Sliding Window / Rolling Hash** → If the problem involves repeated searches (e.g., finding anagrams).
-        
-### **3. Is the problem about generating or validating a string sequence?**
-
-- **Yes** → Consider:
-    - **Stack** → If the problem involves valid parentheses, balanced brackets, or reverse Polish notation.
-    - **Backtracking** → If permutations, subsequences, or partitions are involved.
-        
-
-### **4. Is the problem asking for the longest substring or subsequence with a property?**
-
-- **Yes** → Consider:
-    - **Sliding Window** → If contiguous substrings need to be found.    
-    - **Dynamic Programming (DP)** → If the problem is about subsequences (e.g., Longest Common Subsequence, Palindromic Subsequence).
-        
-
-### **5. Is the problem asking for compressing or encoding a string?**
-
-- **Yes** → Consider:
-    - **Run-Length Encoding** → If basic character compression is needed.    
-    - **Huffman Encoding** → If optimal compression is required.
-        
-
-### **6. Is the problem about word segmentation or breaking a string into words?**
-
-- **Yes** → Consider:
-    - **Trie** → If dictionary-based word lookups are needed.
-        
-    - **Dynamic Programming (DP)** → If checking multiple segmentations.
-        
-
-### **7. Is the problem about constructing a string from operations?**
-
-- **Yes** → Consider:
-    
-    - **Stack** → If undo/redo operations are involved.
-        
-    - **Greedy Algorithm** → If minimal changes need to be made.
-        
+  - **Stack** → When LIFO behavior is required.
 
 ---
 
 ## **Conclusion**
 
-Recognizing patterns in questions will help in choosing the optimal approach. Arrays and Strings are essential for competitive programming and interviews.
+Understand the problem requirements and recognize patterns. Arrays are foundational to advanced structures like stacks, queues, and heaps.
 
 ---
 
-## **Next Steps**
+## **Practice Problems**
+- Two Sum (Hash Map, Two Pointers)  
+- Maximum Subarray (Kadane’s Algorithm)  
+- Longest Substring Without Repeating Characters (Sliding Window)  
+- Next Greater Element (Monotonic Stack)  
+- Binary Search Variants (Lower/Upper Bound)  
 
-- **Practice Problems:**
-    
-    - Longest Substring Without Repeating Characters (Sliding Window)
-        
-    - Valid Parentheses (Stack)
-        
-    - Longest Common Subsequence (DP)
-        
-    - String Search (KMP, Rabin-Karp)
-        
+---
 
-The next topic will be **Linked Lists**, following the same structured approach. Let me know if you’d like any modifications or additional explanations!
+<video 
+  width="600" 
+  controls 
+  style={{ display: 'block', margin: '2rem auto', borderRadius: '8px' }}
+>
+  <source src="/x.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+
+<video 
+  width="600" 
+  controls 
+  style={{ display: 'block', margin: '2rem auto', borderRadius: '8px' }}
+>
+  <source src="/y.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+
+## **Next Topic: Strings**
+
+### **1. Is it about checking anagrams or matching characters?**
+
+- **Yes** → Use:
+  - **Sorting & Comparing**
+  - **Hash Map / Frequency Count**
+
+### **2. Is it about substring search?**
+
+- **Yes** → Use:
+  - **KMP / Rabin-Karp**
+  - **Sliding Window / Rolling Hash**
+
+### **3. Generating/validating a string sequence?**
+
+- **Yes** → Use:
+  - **Stack**
+  - **Backtracking**
+
+### **4. Longest substring/subsequence with a property?**
+
+- **Yes** → Use:
+  - **Sliding Window**
+  - **Dynamic Programming (DP)**
+
+### **5. Compressing or encoding a string?**
+
+- **Yes** → Use:
+  - **Run-Length Encoding**
+  - **Huffman Encoding**
+
+### **6. Word segmentation or breaking into words?**
+
+- **Yes** → Use:
+  - **Trie**
+  - **Dynamic Programming (DP)**
+
+### **7. Constructing strings from operations?**
+
+- **Yes** → Use:
+  - **Stack**
+  - **Greedy Algorithms**
+
+---
+
+## **Practice Problems**
+- Longest Substring Without Repeating Characters  
+- Valid Parentheses  
+- Longest Common Subsequence  
+- String Search (KMP, Rabin-Karp)
+
+---
+
+</div>
