@@ -1,5 +1,5 @@
 import Link from 'next/link';
-export default function BlogPreview({section,slug,date,time,excerpt}){
+export default function BlogPreview({section,slug,date,title,excerpt}){
     const day = new Date(date).getDate().toString().padStart(2,'0');
     const month = new Date(date).toLocaleString('default',{month:'short'});
     return(
