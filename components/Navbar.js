@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 const sections = [
     {slug:"story",label:"Story"},
-    {slug:"Vision",label:"Vision"},
-    {slug:"Systems",label:"Systems"},
+    {slug:"vision",label:"Vision"},
+    {slug:"systems",label:"Systems"},
     {slug:"experiments",label:"Experiments"},
     {slug:"echoes",label:"Echoes"},
     {slug:"research",label:"Reseach"},
