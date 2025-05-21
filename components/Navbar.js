@@ -1,24 +1,24 @@
 import Link from 'next/link';
 
 const sections = [
-    {slug:"story",label:"My Story"},
-    {slug:"Vision",label:"Vision Board"},
+    {slug:"story",label:"Story"},
+    {slug:"Vision",label:"Vision"},
     {slug:"Systems",label:"Systems"},
-    {slug:"experiments",label:"Field Notes from the Edge"},
-    {slug:"echoes",label:"Echoes and guidelights"},
-    {slug:"research",label:"Reseach Shelf"},
-    {slug:"monologue",label:"The Inner Monologue"}
+    {slug:"experiments",label:"Experiments"},
+    {slug:"echoes",label:"Echoes"},
+    {slug:"research",label:"Reseach"},
+    {slug:"monologue",label:"Monologue"}
 ]
 
 export default function Navbar(){
     return(
-        <nav>
-            <div>
+        <nav className='bg-white shadow-md'>
+            <div className='max-w-4xl mx-auto px-4 py-3 flex flex-wrap justify-center gap-4'>
                 {sections.map(({slug,label}) =>(
                     <Link
                         key={slug}
                         href={`/${slug}`}
-                        className="text-lg">
+                        className='whitespace-nowrap text-grey-700 hover:text-blue-600'>
                             {label}
                     </Link>
                 ))}

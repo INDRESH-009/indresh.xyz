@@ -2,7 +2,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 
 export const metadata = {
-  title:"My personal Portfolio",
+  title:"Indresh.xyz",
   description:"My story , path , dreams and more",
 }
 export default function RootLayout({ children }) {
