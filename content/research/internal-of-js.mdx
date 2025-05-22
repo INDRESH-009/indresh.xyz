@@ -1,0 +1,141 @@
+---
+title: "Internals of javascript"
+date: "2025-05-21"
+excerpt: "Understanding JavaScript Execution Context"
+---
+import Image from 'next/image'
+#Internals of javascript
+
+## 🧠 Understanding JavaScript Execution Context
+
+Everything in JavaScript happens **inside an Execution Context**.
+
+Every engine that implements ECMAScript — like:
+
+- 🧩 **V8** (Chrome, Node.js)
+- 🍏 **JavaScriptCore** (Safari)
+- 🦊 **SpiderMonkey** (Firefox, Deno, Bun, etc.)
+
+...creates and manages **execution contexts** according to the spec.
+
+> ✅ Since the entire JavaScript code runs inside an **Execution Context**, this is the first concept you must understand to grasp how JavaScript works under the hood.
+
+---
+
+## 📦 What is an Execution Context?
+
+An **Execution Context** is like a big box that wraps around all the code written in a JS file.
+
+Once the program starts, an execution context is created.
+
+It consists of two main components:
+
+1. **Memory Component** (Variable Environment)
+2. **Code Component** (Thread of Execution)
+
+---
+
+### 1. Memory Component (🧠 Variable Environment)
+
+When the execution context is created, all variables and function declarations are stored in memory as **key-value pairs**.
+
+- Variables: set to `undefined`
+- Functions: entire definition is stored
+
+---
+
+### 2. Code Component (🧾 Thread of Execution)
+
+This part executes your JavaScript **one line at a time**.
+
+JavaScript is a:
+
+- **Single-threaded** language: executes one command at a time
+- **Synchronous** language: executes code line-by-line in order
+
+<Image 
+  src="/research/internal-of-js/img1"
+  alt="Execution context diagram" 
+  className="rounded-xl shadow-lg my-6 border border-gray-200"
+/>
+
+---
+
+## 🚀 How is the Execution Context Created?
+
+Let’s take an example:
+
+```js
+var n = 2;
+function square(num){
+    var ans = num * num;
+    return ans;
+}
+var square2 = square(n);
+var sq4 = square(4);
+```
+
+This code contains:
+- A variable `n`
+- A function `square`
+- Two variables `square2` and `sq4` that store the result of calling `square()`
+
+Once you run this code, the **Global Execution Context (GEC)** is created. This creation happens in **2 phases**:
+
+### 🧮 Phase 1: Memory Allocation
+
+JS engine **scans the entire code**:
+
+- Allocates memory to variables (set to `undefined`)
+- Stores function definitions completely
+
+<Image 
+  src="/research/internal-of-js/img2"
+  alt="Memory Allocation Phase" 
+  className="rounded-xl shadow-lg my-6 border border-gray-200"
+/>
+
+### ⚙️ Phase 2: Code Execution
+
+Now JS engine executes the code **line by line**:
+
+#### 🪜 Step-by-step Execution:
+
+**1.** Executes `var n = 2` → updates memory to `n = 2`
+
+**2.** Skips the function definition line (already stored)
+
+**3.** Hits `var square2 = square(n)` → function is invoked:
+
+- A new **Function Execution Context (FEC)** is created
+- It also goes through:
+  - Memory Allocation Phase:
+    - `num = undefined`
+    - `ans = undefined`
+  - Code Execution Phase:
+    - `num = 2`
+    - `ans = 2 * 2 = 4`
+    - returns `4` → stored as `square2 = 4`
+
+**4.** Executes `var sq4 = square(4)` → similar process:
+
+- New **FEC** created
+- Memory Allocation Phase:
+  - `num = undefined`
+  - `ans = undefined`
+- Code Execution Phase:
+  - `num = 4`
+  - `ans = 4 * 4 = 16`
+  - returns `16` → stored as `sq4 = 16`
+
+---
+
+## 🧩 Summary
+
+- JavaScript runs inside **Execution Contexts**.
+- Every function call creates a **new execution context**.
+- Each context has:
+  - **Memory Phase**: reserves and initializes memory
+  - **Execution Phase**: runs the code line-by-line
+
+Understanding this is essential to mastering **how JavaScript works internally**.
