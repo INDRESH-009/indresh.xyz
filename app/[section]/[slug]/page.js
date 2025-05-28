@@ -20,7 +20,7 @@ export default async function PostPage({ params }) {
   const { code, frontmatter } = await getPostBySlug(section, slug);
 
   return (
-    <article className="prose prose-lg max-w-3xl mx-auto py-12">
+    <article className="prose lg:prose-xl dark:prose-invert">
       <header className="mb-8">
         <h1 className="text-4xl font-bold">{frontmatter.title}</h1>
         <time className="block text-gray-500">
