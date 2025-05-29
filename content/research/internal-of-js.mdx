@@ -1,32 +1,32 @@
 ---
-title: "Internals of javascript"
+title: "Internals of JavaScript"
 date: "2025-05-21"
 excerpt: "Understanding JavaScript Execution Context"
 ---
 
-# Internals of javascript
+# Internals of JavaScript
 
-## 🧠 Understanding JavaScript Execution Context
+## Understanding JavaScript Execution Context
 
-Everything in JavaScript happens **inside an Execution Context**.
+Everything in JavaScript happens inside an **Execution Context**.
 
-Every engine that implements ECMAScript — like:
+Every engine that implements ECMAScript — such as:
 
-- 🧩 **V8** (Chrome, Node.js)
-- 🍏 **JavaScriptCore** (Safari)
-- 🦊 **SpiderMonkey** (Firefox, Deno, Bun, etc.)
+- **V8** (Chrome, Node.js)
+- **JavaScriptCore** (Safari)
+- **SpiderMonkey** (Firefox, Deno, Bun, etc.)
 
-...creates and manages **execution contexts** according to the spec.
+...creates and manages execution contexts according to the specification.
 
-> ✅ Since the entire JavaScript code runs inside an **Execution Context**, this is the first concept you must understand to grasp how JavaScript works under the hood.
+> Since the entire JavaScript code runs inside an **Execution Context**, this is the first concept you must understand to grasp how JavaScript works under the hood.
 
 ---
 
-## 📦 What is an Execution Context?
+## What is an Execution Context?
 
-An **Execution Context** is like a big box that wraps around all the code written in a JS file.
+An **Execution Context** is a construct that wraps around all the code written in a JavaScript file.
 
-Once the program starts, an execution context is created.
+When a program starts, a Global Execution Context is created.
 
 It consists of two main components:
 
@@ -35,23 +35,23 @@ It consists of two main components:
 
 ---
 
-### 1. Memory Component (🧠 Variable Environment)
+### 1. Memory Component (Variable Environment)
 
-When the execution context is created, all variables and function declarations are stored in memory as **key-value pairs**.
+When an execution context is created, all variables and function declarations are stored in memory as **key-value pairs**:
 
-- Variables: set to `undefined`
-- Functions: entire definition is stored
+- Variables are initially set to `undefined`
+- Functions are stored with their entire definitions
 
 ---
 
-### 2. Code Component (🧾 Thread of Execution)
+### 2. Code Component (Thread of Execution)
 
-This part executes your JavaScript **one line at a time**.
+This component is responsible for executing JavaScript code **one line at a time**.
 
-JavaScript is a:
+JavaScript is:
 
-- **Single-threaded** language: executes one command at a time
-- **Synchronous** language: executes code line-by-line in order
+- **Single-threaded** — executes one command at a time
+- **Synchronous** — executes code line-by-line in the order it appears
 
 <Image 
   src="/research/internal-of-js/img1.jpeg"
@@ -63,9 +63,9 @@ JavaScript is a:
 
 ---
 
-## 🚀 How is the Execution Context Created?
+## How is the Execution Context Created?
 
-Let’s take an example:
+Consider the following example:
 
 ```js
 var n = 2;
@@ -80,15 +80,17 @@ var sq4 = square(4);
 This code contains:
 - A variable `n`
 - A function `square`
-- Two variables `square2` and `sq4` that store the result of calling `square()`
+- Two variables `square2` and `sq4` to store results
 
-Once you run this code, the **Global Execution Context (GEC)** is created. This creation happens in **2 phases**:
+When this script runs, the **Global Execution Context (GEC)** is created. Its lifecycle has two phases:
 
-### 🧮 Phase 1: Memory Allocation
+---
 
-JS engine **scans the entire code**:
+### Phase 1: Memory Allocation
 
-- Allocates memory to variables (set to `undefined`)
+The JavaScript engine scans the code:
+
+- Allocates memory for variables (initially `undefined`)
 - Stores function definitions completely
 
 <Image 
@@ -99,47 +101,46 @@ JS engine **scans the entire code**:
   className="rounded-xl shadow-lg my-6 border border-gray-200"
 />
 
-### ⚙️ Phase 2: Code Execution
+---
 
-Now JS engine executes the code **line by line**:
+### Phase 2: Code Execution
 
-#### 🪜 Step-by-step Execution:
+The engine executes the code **line-by-line**:
 
-**1.** Executes `var n = 2` → updates memory to `n = 2`
+#### Step-by-Step Execution
 
-**2.** Skips the function definition line (already stored)
+**1.** Executes `var n = 2` → updates memory: `n = 2`
 
-**3.** Hits `var square2 = square(n)` → function is invoked:
+**2.** Skips the `square` function definition (already stored)
 
-- A new **Function Execution Context (FEC)** is created
-- It also goes through:
-  - Memory Allocation Phase:
-    - `num = undefined`
-    - `ans = undefined`
-  - Code Execution Phase:
-    - `num = 2`
-    - `ans = 2 * 2 = 4`
-    - returns `4` → stored as `square2 = 4`
+**3.** Executes `var square2 = square(n)`:
+- A **Function Execution Context (FEC)** is created
+- Memory Allocation Phase:
+  - `num = undefined`
+  - `ans = undefined`
+- Code Execution Phase:
+  - `num = 2`
+  - `ans = 2 * 2 = 4`
+  - returns `4` → assigned to `square2`
 
-**4.** Executes `var sq4 = square(4)` → similar process:
-
-- New **FEC** created
+**4.** Executes `var sq4 = square(4)`:
+- Another **FEC** is created
 - Memory Allocation Phase:
   - `num = undefined`
   - `ans = undefined`
 - Code Execution Phase:
   - `num = 4`
   - `ans = 4 * 4 = 16`
-  - returns `16` → stored as `sq4 = 16`
+  - returns `16` → assigned to `sq4`
 
 ---
 
-## 🧩 Summary
+## Summary
 
-- JavaScript runs inside **Execution Contexts**.
-- Every function call creates a **new execution context**.
-- Each context has:
-  - **Memory Phase**: reserves and initializes memory
-  - **Execution Phase**: runs the code line-by-line
+- JavaScript code runs inside **Execution Contexts**
+- Each function call creates a **new execution context**
+- Every context has:
+  - **Memory Phase** — reserves and initializes memory
+  - **Execution Phase** — runs code line-by-line
 
-Understanding this is essential to mastering **how JavaScript works internally**.
+Understanding Execution Contexts is essential to mastering how JavaScript works internally.
